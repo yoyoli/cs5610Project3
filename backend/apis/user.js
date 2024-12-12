@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const UserModel = require('../db/user/user.model');
+const StatusModel = require('../db/status/status.model');
 
 // GET all users
 router.get('/', async function (req, res) {
@@ -80,5 +81,22 @@ router.delete('/:id', async function (req, res) {
         res.status(500).json({ error: err.message });
     }
 });
+
+router.get('/:id', async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const user = await UserModel.findById(id);
+      if (!user) {
+        return res.status(404).json({ error: 'User not found' });
+      }
+  
+      const statuses = await StatusModel.find({ user: user._id }).sort({ createdAt: -1 });
+      res.json({ user, statuses });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+});
+
 
 module.exports = router;

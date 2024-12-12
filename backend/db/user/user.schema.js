@@ -13,7 +13,11 @@ const UserSchema = new Schema({
         required: true,
         minlength: 6,
     },
-
+    createdAt: {
+        type: Date,
+        default: () => new Date(),
+        immutable: true,
+    },
 });
 
 module.exports = UserSchema;

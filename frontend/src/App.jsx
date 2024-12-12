@@ -31,7 +31,8 @@ const App = () => {
               }
             />
             <Route path="/register" element={<RegisterPage />} />
-            <Route path="/user/:id" element={<UserPage />} />
+            <Route path="/users/:username" element={<UserPage />} />
+            <Route path="/users/:userID" element={<UserPage />} />
           </Routes>
         </Router>
       </StatusProvider>
