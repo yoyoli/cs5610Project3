@@ -45,7 +45,7 @@ const HomePage = ({ user }) => {
             statuses.map((status) => (
               <StatusCard
                 key={status._id}
-                username={status.user.username}
+                username={status.user?.username || "Unknown"}
                 content={status.content}
                 createdAt={status.createdAt}
               />
