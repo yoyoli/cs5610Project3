@@ -19,8 +19,10 @@ export const loginUser = async (username, password) => {
         const response = await axios.post(`${API_BASE_URL}/login`, { username, password });
         return response.data;
     } catch (error) {
-        console.error('Error logging in:', error.response.data);
-        throw error.response.data;
+        // console.error('Error logging in:', error.response.data);
+        // throw error.response.data;
+        console.error('Error logging in:', error.response?.data || error.message);
+        throw error.response?.data || { error: 'Unexpected error occurred during login.' };
     }
 };
 

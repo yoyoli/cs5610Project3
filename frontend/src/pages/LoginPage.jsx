@@ -13,6 +13,7 @@ const LoginPage = ({ onLogin }) => {
             onLogin(data.user);
             setError('');
         } catch (err) {
+            console.error('Login error:', err);
             setError(err.error || 'Invalid username or password');
         }
     };

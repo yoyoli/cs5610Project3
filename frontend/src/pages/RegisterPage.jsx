@@ -11,7 +11,7 @@ const RegisterPage = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
-            await createUser(username, password, email);
+            await createUser(username, password);
             setSuccess('User created successfully!');
             setError('');
             setUsername('');

@@ -51,11 +51,11 @@ router.post('/login', async function (req, res) {
 // PUT Update user
 router.put('/:id', async function (req, res) {
     const { id } = req.params;
-    const { username, email } = req.body;
+    const { username, password } = req.body;
     try {
         const updatedUser = await UserModel.findByIdAndUpdate(
             id,
-            { username, email },
+            { username, password },
             { new: true }
         );
         if (!updatedUser) {
