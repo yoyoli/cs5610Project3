@@ -1,0 +1,34 @@
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #444;
+    padding: 10px 20px;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+  
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+  
+.navbar a:hover {
+    text-decoration: underline;
+}
+  
+.navbar button {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.navbar button:hover {
+    background-color: #ff2222;
+}
+  
