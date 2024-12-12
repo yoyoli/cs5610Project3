@@ -35,7 +35,7 @@ const HomePage = ({ user }) => {
         {user ? (
           <div className="logged-in-user">
             <p>Welcome, {user.username}!</p>
-            <StatusForm />
+            <StatusForm user={user} setStatuses={setStatuses} />
           </div>
         ) : (
           <p>Please log in to create a status update.</p>

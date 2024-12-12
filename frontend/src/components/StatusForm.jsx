@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import "../styles/Form.css";
+import { createStatus } from "../api/statusApi";
 
-const StatusForm = ({ onSubmit }) => {
+const StatusForm = ({ user, setStatuses }) => {
   const [content, setContent] = useState("");
 
-  const handleSubmit = async (content) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!content.trim()) return;
     try {
-        await createStatus(user._id, content);
-        fetchStatuses();
-    } catch (err) {
-        console.error(err);
+      const newStatus = await createStatus(user._id, content);
+      setStatuses((prev) => [newStatus, ...prev]);
+      setContent("");
+    } catch (error) {
+      console.error("Fail to post:", error);
     }
-};
+  };
 
 
   return (

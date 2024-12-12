@@ -13,15 +13,21 @@ export const fetchStatuses = async () => {
   }
 };
 
-export const createStatus = async (statusData, token) => {
+export const createStatus = async (userId, content, token) => {
   try {
-    const response = await axios.post(`${API_URL}/create`, statusData, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await axios.post(
+      `${API_URL}`,
+      { user: userId, content },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
-    console.error("Error creating status:", error);
-    throw error;
+    console.error("Error creating status:", error.response?.data || error.message);
+    throw error.response?.data || { error: "Error occurred while creating status." };
   }
 };
 
