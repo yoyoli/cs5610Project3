@@ -10,6 +10,7 @@ const StatusForm = ({ user, setStatuses }) => {
     if (!content.trim()) return;
     try {
       const newStatus = await createStatus(user._id, content);
+      newStatus.user = { _id: user._id, username: user.username };
       setStatuses((prev) => [newStatus, ...prev]);
       setContent("");
     } catch (error) {
