@@ -24,6 +24,7 @@ const Navbar = ({ user, setUser }) => {
       ) : (
         <a href="/login">Login</a>
       )}
+      <Link to="/register">Create Account</Link>
     </nav>
   );
 };
