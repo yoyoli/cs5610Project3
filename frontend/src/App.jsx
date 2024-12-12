@@ -1,6 +1,4 @@
-//import React from 'react';
 import React, { useState } from 'react';
-//import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
@@ -17,7 +15,7 @@ const App = () => {
     <AuthProvider>
       <StatusProvider>
         <Router>
-          <Navbar user={user} />
+          <Navbar user={user} setUser={setUser} />
           <Routes>
             <Route path="/" element={<HomePage user={user} setUser={setUser}/>} />
             <Route
