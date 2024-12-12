@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 const StatusSchema = new Schema(
     {
         user: {
-            type: String,
+            //type: String,
+            type: Schema.Types.ObjectId,
+            ref: 'User',    
             required: true,
         },
         content: {

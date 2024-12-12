@@ -6,7 +6,8 @@ const StatusModel = require('../db/status/status.model');
 router.get('/', async function (req, res) {
     try {
         const statuses = await StatusModel.find()
-        .sort({ createdAt: -1 });
+        .sort({ createdAt: -1 })
+        .populate('user', 'username');
         res.json(statuses);
     } catch (err) {
         res.status(500).json({ error: err.message });

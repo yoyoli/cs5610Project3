@@ -3,9 +3,9 @@ import axios from 'axios';
 const API_BASE_URL = 'http://localhost:8000/api/users';
 
 //（Create Account）
-export const createUser = async (username, password, email) => {
+export const createUser = async (username, password) => {
     try {
-        const response = await axios.post(API_BASE_URL, { username, password, email });
+        const response = await axios.post(API_BASE_URL, { username, password });
         return response.data;
     } catch (error) {
         console.error('Error creating user:', error.response.data);
@@ -25,9 +25,9 @@ export const loginUser = async (username, password) => {
 };
 
 //（Update User）
-export const updateUser = async (id, username, email) => {
+export const updateUser = async (id, username) => {
     try {
-        const response = await axios.put(`${API_BASE_URL}/${id}`, { username, email });
+        const response = await axios.put(`${API_BASE_URL}/${id}`, { username});
         return response.data;
     } catch (error) {
         console.error('Error updating user:', error.response.data);

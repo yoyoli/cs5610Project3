@@ -4,13 +4,22 @@ import "../styles/Form.css";
 const StatusForm = ({ onSubmit }) => {
   const [content, setContent] = useState("");
 
-  const handleSubmit = (e) => {
+  /*const handleSubmit = (e) => {
     e.preventDefault();
     if (content.trim()) {
       onSubmit(content);
       setContent("");
     }
-  };
+  };*/
+  const handleSubmit = async (content) => {
+    try {
+        await createStatus(user._id, content);
+        fetchStatuses();
+    } catch (err) {
+        console.error(err);
+    }
+};
+
 
   return (
     <form className="status-form" onSubmit={handleSubmit}>

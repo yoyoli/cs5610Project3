@@ -14,16 +14,16 @@ router.get('/', async function (req, res) {
 
 // POST Create Account
 router.post('/', async function (req, res) {
-    const { username, password, email } = req.body;
-    if (!username || !password || !email) {
-        return res.status(400).json({ error: 'Missing username, password, or email' });
+    const { username, password } = req.body;
+    if (!username || !password) {
+        return res.status(400).json({ error: 'Missing username or password' });
     }
     try {
         const existingUser = await UserModel.findOne({ username });
         if (existingUser) {
             return res.status(409).json({ error: 'Username already exists' });
         }
-        const newUser = new UserModel({ username, password, email });
+        const newUser = new UserModel({ username, password });
         await newUser.save();
         res.status(201).json(newUser);
     } catch (err) {
