@@ -31,14 +31,22 @@ export const createStatus = async (userId, content, token) => {
   }
 };
 
-export const deleteStatus = async (statusId, token) => {
+export const updateStatus = async (statusId, content) => {
   try {
-    const response = await axios.delete(`${API_URL}/delete/${statusId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await axios.put(`${API_URL}/${statusId}`, { content });
     return response.data;
   } catch (error) {
-    console.error("Error deleting status:", error);
-    throw error;
+    console.error("Error updating status:", error.response?.data || error.message);
+    throw error.response?.data || { error: "Error occurred while updating status." };
+  }
+};
+
+export const deleteStatus = async (statusId) => {
+  try {
+      const response = await axios.delete(`http://localhost:8000/api/status/${statusId}`);
+      return response.data;
+  } catch (error) {
+      console.error("Error deleting status:", error.response?.data || error.message);
+      throw error.response?.data || { error: "Error occurred while deleting status." };
   }
 };

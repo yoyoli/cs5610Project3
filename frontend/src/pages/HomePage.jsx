@@ -48,6 +48,8 @@ const HomePage = ({ user }) => {
                 username={status.user?.username || "Unknown"}
                 content={status.content}
                 createdAt={status.createdAt}
+                statusId={status._id}
+                setStatuses={setStatuses}
               />
             ))
           ) : (
