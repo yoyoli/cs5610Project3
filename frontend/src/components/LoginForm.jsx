@@ -8,7 +8,7 @@ const LoginForm = ({ onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (onLogin) {
-      onLogin(username, password); // 调用父组件传入的 onLogin 方法，传递 username 和 password
+      onLogin(username, password);
     }
   };
 

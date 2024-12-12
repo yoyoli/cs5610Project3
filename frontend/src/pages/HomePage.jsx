@@ -50,6 +50,7 @@ const HomePage = ({ user }) => {
                 createdAt={status.createdAt}
                 statusId={status._id}
                 setStatuses={setStatuses}
+                userID={status.user?._id || ""}
               />
             ))
           ) : (

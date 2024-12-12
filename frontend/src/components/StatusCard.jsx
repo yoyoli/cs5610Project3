@@ -3,7 +3,7 @@ import "../styles/Card.css";
 import { deleteStatus, updateStatus } from "../api/statusApi";
 import { Link } from "react-router-dom";
 
-const StatusCard = ({ username = "Unknown", content, createdAt, statusId, setStatuses }) => {
+const StatusCard = ({ username = "Unknown", content, createdAt, statusId, setStatuses, userID }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(content);
 
@@ -40,7 +40,7 @@ const StatusCard = ({ username = "Unknown", content, createdAt, statusId, setSta
 
   return (
     <div className="status-card">
-      <h3><Link to={`/user/${username}`}>{username}</Link></h3>
+      <h3><Link to={`/users/${userID}`}>{username}</Link></h3>
       {isEditing ? (
         <textarea
           value={editedContent}
