@@ -44,6 +44,9 @@ const UserPage = () => {
               content={status.content}
               createdAt={status.createdAt}
               statusId={status._id}
+              setStatuses={setStatuses}
+              userID={user._id}
+              disableUsernameLink
             />
           ))
         ) : (
