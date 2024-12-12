@@ -5,8 +5,7 @@ import StatusForm from "../components/StatusForm";
 import { AuthContext } from "../context/AuthContext";
 import { fetchStatuses } from "../api/statusApi";
 
-const HomePage = () => {
-  const { user } = useContext(AuthContext);
+const HomePage = ({ user }) => {
   const [statuses, setStatuses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,7 +33,10 @@ const HomePage = () => {
       <main className="home-container">
         <h1>Home Page</h1>
         {user ? (
-          <StatusForm />
+          <div className="logged-in-user">
+            <p>Welcome, {user.username}!</p>
+            <StatusForm />
+          </div>
         ) : (
           <p>Please log in to create a status update.</p>
         )}
@@ -43,7 +45,6 @@ const HomePage = () => {
             statuses.map((status) => (
               <StatusCard
                 key={status._id}
-                // username={status.user}
                 username={status.user.username}
                 content={status.content}
                 createdAt={status.createdAt}

@@ -32,3 +32,15 @@
     background-color: #ff2222;
 }
   
+.navbar-username {
+    font-weight: bold;
+    margin: 0 10px;
+}
+  
+.logged-in-user {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: grey;
+}
+  

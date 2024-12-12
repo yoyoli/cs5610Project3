@@ -17,9 +17,9 @@ const App = () => {
     <AuthProvider>
       <StatusProvider>
         <Router>
-          <Navbar />
+          <Navbar user={user} />
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage user={user} setUser={setUser}/>} />
             <Route
               path="/login"
               element={
