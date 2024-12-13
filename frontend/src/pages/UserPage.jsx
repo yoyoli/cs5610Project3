@@ -1,22 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import StatusCard from "../components/StatusCard";
+import { updateUser, deleteUser } from "../api/userApi";
 
 const API_URL = "http://localhost:8000/api";
 
-const UserPage = () => {
+const UserPage = ({ user, setUser }) => {
   const { username } = useParams();
-  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState(null);
   const [statuses, setStatuses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [editingUsername, setEditingUsername] = useState("");
+  const [editingPassword, setEditingPassword] = useState("");
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const userResponse = await axios.get(`${API_URL}/users/${username}`);
-        setUser(userResponse.data.user);
+        setCurrentUser(userResponse.data.user);
         setStatuses(userResponse.data.statuses);
         setLoading(false);
       } catch (err) {
@@ -28,24 +32,98 @@ const UserPage = () => {
     fetchUserData();
   }, [username]);
 
+  useEffect(() => {
+    if (currentUser) {
+      setEditingUsername(currentUser.username);
+      setEditingPassword("");
+    }
+  }, [currentUser]);
+
   if (loading) return <p>Loading user data...</p>;
   if (error) return <p>Error: {error}</p>;
 
+  const handleUpdate = async () => {
+    if (!currentUser || !currentUser._id) {
+      alert("User data is not loaded yet.");
+      return;
+    }
+
+    try {
+      const requestBody = {
+        username: editingUsername.trim(),
+        password: editingPassword.trim(),
+      };
+
+      if (!requestBody.username || !requestBody.password) {
+        alert("Both username and password are required.");
+        return;
+      }
+
+      const updatedUser = await updateUser(currentUser._id, requestBody);
+      setCurrentUser(updatedUser); // 更新 currentUser
+      alert("User updated successfully!");
+    } catch (err) {
+      console.error("Error updating user:", err);
+      alert("Failed to update user.");
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteUser(currentUser._id);
+      alert("User deleted successfully!");
+      setCurrentUser(null);
+      setUser(null);
+      navigate("/");
+    } catch (err) {
+      console.error("Error deleting user:", err);
+      alert("Failed to delete user.");
+    }
+  };
+
   return (
     <main className="user-container">
-      <h1>{user.username}'s Profile</h1>
-      <p>Joined on: {new Date(user.createdAt).toLocaleDateString()}</p>
+      <h1>{currentUser?.username || "User"}'s Profile</h1>
+      <p>Joined on: {new Date(currentUser?.createdAt || Date.now()).toLocaleDateString()}</p>
+
+      <div>
+        <h2>Edit User Information</h2>
+        <label>
+          New Username:
+          <input
+            type="text"
+            value={editingUsername}
+            onChange={(e) => setEditingUsername(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          New Password:
+          <input
+            type="password"
+            value={editingPassword}
+            onChange={(e) => setEditingPassword(e.target.value)}
+          />
+        </label>
+        <br />
+        <button onClick={handleUpdate}>Save Changes</button>
+      </div>
+
+      <button onClick={handleDelete} style={{ marginTop: "20px", color: "red" }}>
+        Delete Account
+      </button>
+
       <section className="status-list">
         {statuses.length > 0 ? (
           statuses.map((status) => (
             <StatusCard
               key={status._id}
-              username={user.username || "Unknown"}
+              username={currentUser.username || "Unknown"}
               content={status.content}
               createdAt={status.createdAt}
               statusId={status._id}
               setStatuses={setStatuses}
-              userID={user._id}
+              userID={currentUser._id}
               disableUsernameLink
             />
           ))
