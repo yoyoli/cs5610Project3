@@ -82,15 +82,25 @@ const UserPage = ({ user, setUser }) => {
 
   const handleDelete = async () => {
     try {
+      if (!currentUser || !currentUser._id) {
+        alert("No user data to delete.");
+        return;
+      }
+  
       await deleteUser(currentUser._id);
       alert("User deleted successfully!");
+  
       setCurrentUser(null);
-      setUser(null);
+      if (setUser) {
+        setUser(null);
+      }
       navigate("/");
     } catch (err) {
       console.error("Error deleting user:", err);
+      alert("Failed to delete user.");
     }
   };
+  
 
   return (
     <main className="user-container">
