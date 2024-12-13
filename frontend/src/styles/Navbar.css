@@ -34,13 +34,25 @@
   
 .navbar-username {
     font-weight: bold;
+    text-align: center;
     margin: 0 10px;
 }
   
-.logged-in-user {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: grey;
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-button,
+.register-button {
+    text-decoration: none;
+    color: white;
+    margin: 0;
+}
+
+.login-button:hover,
+.register-button:hover {
+    text-decoration: underline;
 }
   

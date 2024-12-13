@@ -16,6 +16,7 @@ const Navbar = ({ user, setUser }) => {
   return (
     <nav className="navbar">
       <a href="/">Home</a>
+      <div className="navbar-right">
       {user ? (
         <>
           <span className="navbar-username">{user.username}</span>
@@ -25,6 +26,7 @@ const Navbar = ({ user, setUser }) => {
         <a href="/login">Login</a>
       )}
       <Link to="/register">Create Account</Link>
+      </div>
     </nav>
   );
 };
