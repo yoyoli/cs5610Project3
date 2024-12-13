@@ -47,26 +47,38 @@ const UserPage = ({ user, setUser }) => {
       alert("User data is not loaded yet.");
       return;
     }
-
+  
     try {
       const requestBody = {
         username: editingUsername.trim(),
         password: editingPassword.trim(),
       };
-
+  
       if (!requestBody.username || !requestBody.password) {
         alert("Both username and password are required.");
         return;
       }
-
-      const updatedUser = await updateUser(currentUser._id, requestBody);
-      setCurrentUser(updatedUser); // 更新 currentUser
+  
+      console.log("Sending Request Body:", requestBody);
+  
+      const updatedUser = await axios.put(
+        `${API_URL}/users/${currentUser._id}`,
+        JSON.stringify(requestBody),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      setCurrentUser(updatedUser.data);
       alert("User updated successfully!");
     } catch (err) {
       console.error("Error updating user:", err);
       alert("Failed to update user.");
     }
   };
+  
 
   const handleDelete = async () => {
     try {
@@ -77,7 +89,6 @@ const UserPage = ({ user, setUser }) => {
       navigate("/");
     } catch (err) {
       console.error("Error deleting user:", err);
-      alert("Failed to delete user.");
     }
   };
 
