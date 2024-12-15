@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // const API_BASE_URL = 'https://localhost:8000/api/users';
-const API_BASE_URL = 'http://shirui-li-project3-backend.onrender.com/api/users';
+const API_BASE_URL = 'https://shirui-li-project3-backend.onrender.com/api/users';
 
 //（Create Account）
 export const createUser = async (username, password) => {

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const API_URL = "https://localhost:8000/api/status";
-const API_URL = 'http://shirui-li-project3-backend.onrender.com/api/status';
+const API_URL = 'https://shirui-li-project3-backend.onrender.com/api/status';
 
 export const fetchStatuses = async () => {
   try {
