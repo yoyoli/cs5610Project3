@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// const API_URL = "http://localhost:8000/api/status";
+// const API_URL = "https://localhost:8000/api/status";
 const API_URL = 'http://shirui-li-project3-backend.onrender.com/api/status';
 
 export const fetchStatuses = async () => {
@@ -43,7 +43,7 @@ export const updateStatus = async (statusId, content) => {
 
 export const deleteStatus = async (statusId) => {
   try {
-      const response = await axios.delete(`http://shirui-li-project3-backend.onrender.com/api/status/${statusId}`);
+      const response = await axios.delete(`https://shirui-li-project3-backend.onrender.com/api/status/${statusId}`);
       return response.data;
   } catch (error) {
       console.error("Error deleting status:", error.response?.data || error.message);
