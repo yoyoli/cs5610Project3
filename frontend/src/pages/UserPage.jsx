@@ -4,7 +4,7 @@ import axios from "axios";
 import StatusCard from "../components/StatusCard";
 import { updateUser, deleteUser } from "../api/userApi";
 
-const API_URL = "http://localhost:8000/api";
+const API_URL = "https://shirui-li-project3-backend.onrender.com/api";
 
 const UserPage = ({ user, setUser }) => {
   const { username } = useParams();
