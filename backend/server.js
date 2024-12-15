@@ -28,12 +28,18 @@ app.use(cookieParser());
 app.use('/api/status', statusRoutes);
 app.use('/api/users', userRoutes);
 
-const frontendDir = path.join(__dirname, '..', 'frontend', 'dist');
-app.use(express.static(frontendDir));
+//const frontendDir = path.join(__dirname, '..', 'frontend', 'dist');
+//app.use(express.static(frontendDir));
 
 // get request
-app.get('*', (req, res) => {
+/*app.get('*', (req, res) => {
     res.sendFile(path.join(frontendDir, 'index.html'));
+});*/
+
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
 // 404
