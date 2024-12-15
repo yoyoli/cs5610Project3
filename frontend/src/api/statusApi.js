@@ -43,7 +43,7 @@ export const updateStatus = async (statusId, content) => {
 
 export const deleteStatus = async (statusId) => {
   try {
-      const response = await axios.delete(`http://localhost:8000/api/status/${statusId}`);
+      const response = await axios.delete(`http://shirui-li-project3-backend.onrender.com/api/status/${statusId}`);
       return response.data;
   } catch (error) {
       console.error("Error deleting status:", error.response?.data || error.message);
